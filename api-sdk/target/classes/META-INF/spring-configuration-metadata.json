@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "api.client",
+      "type": "com.mu.apiclient.ApiClientConfig",
+      "sourceType": "com.mu.apiclient.ApiClientConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "api.client.access-key",
+      "type": "java.lang.String",
+      "sourceType": "com.mu.apiclient.ApiClientConfig"
+    },
+    {
+      "name": "api.client.app-id",
+      "type": "java.lang.Integer",
+      "sourceType": "com.mu.apiclient.ApiClientConfig"
+    },
+    {
+      "name": "api.client.secret-key",
+      "type": "java.lang.String",
+      "sourceType": "com.mu.apiclient.ApiClientConfig"
+    }
+  ],
+  "hints": []
+}

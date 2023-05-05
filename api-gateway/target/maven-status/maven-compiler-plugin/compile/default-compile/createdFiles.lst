@@ -1,0 +1,5 @@
+com\mu\gateway\config\CustomGlobalFilter.class
+com\mu\api\provider\InnerService.class
+com\mu\gateway\config\CorsConfig.class
+com\mu\gateway\config\CustomGlobalFilter$1.class
+com\mu\gateway\GateWayApplication.class

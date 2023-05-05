@@ -1,0 +1,78 @@
+server:
+  port: 8200
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://114.55.238.110:63306/api
+    username: root
+    password: qwer1234
+  rabbitmq:
+    host: 114.55.238.110
+    virtual-host: / # 虚拟主机
+    port: 5672
+    username: guest
+    password: guest
+    listener:
+      simple:
+        acknowledge-mode: manual #手动确认接收到的消息
+        prefetch: 1 # 每次只能获取一条消息，处理完成才能获取下一个消息
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  # redis 配置
+  redis:
+    port: 6379
+    host: 114.55.238.110
+    database: 0
+    password: 1234
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8  #最大空闲数
+        min-idle: 0 #最小空闲连接
+        max-wait: 100ms #连接等待时间
+
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+tencent:
+  secretId: AKIDRrFd0HSVVRLiLuRtEWjtCRbggv9KRUSJ #短信控制台查看
+  secretKey: z7FKDypcIrGWkmeNwIPPFuPjusfHk261 #短信控制台查看
+  sdkAppId: #腾讯云短信控制台查看
+  signName: #腾讯云短信控制台查看
+  templateId: #腾讯云短信控制台查看
+
+#gitee 登录配置
+gitee:
+  client_id: 7d9f0b44f3f5fe27722c5f54cbb5c8b66ee908de39d34f08204dea5b28a706e1
+  client_secret: 6ff8f892034ded508a1ad7f619c9989bfeed8dde18a0a3e7d566d45cbd26f22d
+  redirect_uri: http://localhost:88/api/oauth/gitee
+
+#GitHub 登录配置
+github:
+  client_id: 4f2711fe7c282b1e2eef
+  client_secret: 2b3532b6e305836dc859b884668a4a93395b6035
+  redirect_uri: http://localhost:88/api/oauth/github
+
+#支付宝沙箱支付配置
+alipay:
+  CHARSET: utf-8 #编码格式
+  SIGN_TYPE: RSA2 #签名方式
+  #沙箱环境应用appid值
+  APP_ID: 2021000122614693
+  #沙箱环境下的私钥
+  PRIVATE_KEY: MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCJolgGG5Nmn8RNu4Q02l0yxQyEx3afwVlOZM1xQAth4KlT0+6zPuELzWP0+muQbSzgwjcs80P/KW1kWhMpwoI7YfSij53R5wb8aCo9PvcqgogiliNzR2nxynNwubnmaBj+7kHdprh/zHtJ27EeNpx71eAdPWPIpLKtFO6lTPkZmlxtRggcwRoU5NAibC+ent8e/tr09Xs0H0+b/AKgrAKVt7NLeCOzFOgrNLD6aDXlduYwtESKFJxlq1zAv2FBF9T89TFZECZxWwba0UIdYWj4vuqN7CEkQ1LoUnk1dPUUEQvzcL+W3UX4JoaGM5OIfNFC6qCcvvB+chdu4ani10LdAgMBAAECggEAFCNJx9L/FTPpMApwxJ7ypfwI4eChbayHmZ3MJXbec3rAq8BFm7pmiSiLKIv/cwlWWKhyFESfvVTdaaJ4TVLlZTTm62YiDFVGQ2YmUAHHflPNAWqAU1yulq8tht/V4G14wswvnPPI6QINQ/g+CRKqgMABY6XY1MGsVwDKDiueAu3IQRz591dQu0TxGWLcALCRzkZ9UMmRAqq9M+bs1ToTsMU0zy2HDU8H0j5pOXP7s8GTi6zcpPzm1eFynmHzAzVGF5lbnZFF65hImmfxqtWcsKcc/KkfmoxFhXKt0DNgebhyCYYO0W7o+oUJ60yK1jVcpzHof6lyh8OnERCcYu+q4QKBgQDecVkAlbbwSt4y546Y1QoL6V+pyubseX7ZfY8W8GtTUSKv82Vre2GZqLAkRmwdU4n/3XLNtQePmoxktkRN1QnzP7ovj04bDxmPa9WwlicLHNWZj8rUwsQ9+Bt6rxVrPbvI5r7xppG7/WMypbzKXJHPaQLpSqf2UHHC4GH+IdrF5QKBgQCeZbiRMmAL32Rx+LzSM2uyskNxynvci5fJzDHLFkrAcDVJtS8lYxTNNStr8vwXglOmPr3I51Lyt03WAafPVwJXLw463my0/rkQoXPdRjZ0cBYfvgbqFx8F8STVR+WDj4+MahsQBye6GmzscU+eCRKhMTeFuofmyrWVHj7PrHs5mQKBgBSCyR0nsO2pSaHR/jETe9CrXTnPzslBTrQJQtdvpcXR9mvY+qIVh2NezZcasz9lA5WHOt3C8oaITqe+sr+mhDtcxfM6uI4AL3AtFlApGEKLDxsQyjgiGWxJY2dFm6j+0UDuHe80V73I2IvEAot6S6ufWDhgvOoWctbwT7jaME0NAoGBAJs/g/j78NtyJtb2Psufjo1k32nmViRBxZIKSzuMK9QVpoUJyp3QUREYbeiuDZtVJ3unvwfsgoZWVznMAZfc5fRhsIbOfqmfh+/e7tsP+EuDmIugCtLhuoxuX/WTNEcQLFgpn0DEYpGrWNsd7DUvG01WGd8+hfkU8YioTlPp8BTxAoGBAIRuZXH2draMvltMn0KswzB5DnrjZJEUYZuCnw5gK7ULN9WfafxYsK3EcVQCP6mfE49wSmIBsKKR4rimCto8he/Pa/W3e5g2HkFuSL29aEnAxnL1yg/iMG+SgjvcHbxkULYuTV3HuCVsr+AQ1HymmyT5t8q3TH/GUMWd/FfAGHou
+  #支付宝公钥
+  ALIPAY_PUBLIC_KEY: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAiaJYBhuTZp/ETbuENNpdMsUMhMd2n8FZTmTNcUALYeCpU9Pusz7hC81j9PprkG0s4MI3LPND/yltZFoTKcKCO2H0oo+d0ecG/GgqPT73KoKIIpYjc0dp8cpzcLm55mgY/u5B3aa4f8x7SduxHjace9XgHT1jyKSyrRTupUz5GZpcbUYIHMEaFOTQImwvnp7fHv7a9PV7NB9Pm/wCoKwClbezS3gjsxToKzSw+mg15XbmMLREihScZatcwL9hQRfU/PUxWRAmcVsG2tFCHWFo+L7qjewhJENS6FJ5NXT1FBEL83C/lt1F+CaGhjOTiHzRQuqgnL7wfnIXbuGp4tdC3QIDAQAB
+  #沙箱环境网关地址
+  ALIPAY_GATEWAY: https://openapi.alipaydev.com/gateway.do
+  #支付成功回调地址
+  NotifyUrl: http://localhost:88/api/alipay/notify
+  tradeSuccessUrl: http://localhost:8000/getRequestCounts

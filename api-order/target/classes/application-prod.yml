@@ -1,0 +1,78 @@
+server:
+  port: 8300
+  servlet:
+    context-path: /api
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://114.55.238.110:63306/api
+    username: root
+    password: qwer1234
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+  application:
+    name: api-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 114.55.238.110:8848
+        namespace: 92fae847-efb0-48bb-89a9-826c3b37ac22
+        password: nacos
+  rabbitmq:
+    host: 114.55.238.110
+    virtual-host: / # 虚拟主机
+    port: 5672
+    username: guest
+    password: guest
+    publisher-confirm-type: correlated #开启发送端确认
+    publisher-returns: true #开启发送端消息抵达队列的确认
+    template:
+      mandatory: true #只要抵达队列，以异步发送优先回调我们这个returnsConfirm
+  # redis 配置
+  redis:
+    port: 6379
+    host: 114.55.238.110 #192.168.31.119  10.1.11.72 localhost
+    database: 0
+    password: 1234
+    lettuce:
+      pool:
+        max-active: 8 #最大连接数
+        max-idle: 8  #最大空闲数
+        min-idle: 0 #最小空闲连接
+        max-wait: 100ms #连接等待时间
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: isDelete # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+order:
+  thread:
+    coreSize: 20
+    maxSize: 200
+    keepAliveTime: 10
+
+# UidGenerator
+# 初始时间, 默认:"2019-02-20"
+uid:
+  epochStr: 2023-04-23
+  # 时间位, 默认:30
+  timeBits: 41
+  # 机器位, 默认:16
+  workerBits: 10
+  # 序列号, 默认:7
+  seqBits: 12
+  # 是否容忍时钟回拨, 默认:true
+  enableBackward: true
+  # RingBuffer size扩容参数, 可提高UID生成的吞吐量, 默认:3
+  CachedUidGenerator:
+    boostPower: 3
+    # 指定何时向RingBuffer中填充UID, 取值为百分比(0, 100), 默认为50
+    paddingFactor: 50
+
